@@ -10,6 +10,7 @@
 #include <dt-bindings/input/rk-input.h>
 #include "rk3506.dtsi"
 #include "rk3506-armsom-forge1-display.dtsi"
+
 / {
 	model = "Rockchip RK3506J(BGA) ArmSoM Forge1";
 	compatible = "rockchip,rk3506J-armsom-forge1", "rockchip,rk3506";
@@ -120,6 +121,37 @@
 		rockchip,baudrate = <1500000>;	/* Only 115200 and 1500000 */
 		interrupts = <GIC_SPI 115 IRQ_TYPE_LEVEL_HIGH>;
 	};
+
+	rk730_sound: rk730-sound {
+		status = "okay";
+		compatible = "rockchip,multicodecs-card";
+		rockchip,card-name = "rockchip-rk730";
+		rockchip,pre-power-on-delay-ms = <30>;
+		rockchip,post-power-down-delay-ms = <40>;
+		rockchip,format = "i2s";
+		rockchip,mclk-fs = <256>;
+		rockchip,cpu = <&sai1>;
+		rockchip,codec = <&rk730>;
+		rockchip,audio-routing =
+			"Headphone", "LOUT1",
+			"Headphone", "ROUT1",
+			"Speaker", "LOUT2",
+			"Speaker", "ROUT2",
+			"Headphone", "Headphone Power",
+			"Headphone", "Headphone Power",
+			"Speaker", "Speaker Power",
+			"Speaker", "Speaker Power",
+			"MIC2", "Main Mic",
+			"MIC1", "Headset Mic";
+	};
+};
+
+&can0 {
+	assigned-clocks = <&cru CLK_CAN0>;
+	assigned-clock-rates = <300000000>;
+	pinctrl-0 = <&rm_io19_can0_tx &rm_io20_can0_rx>;
+	pinctrl-names = "default";
+	status = "okay";
 };
 
 &cma {
@@ -128,30 +160,6 @@
 
 &cpu0 {
  cpu-supply = <&vdd_arm>;
-};
-
-&can0 {
-	assigned-clocks = <&cru CLK_CAN0>;
-	assigned-clock-rates = <300000000>;
-	pinctrl-0 = <&rm_io30_can0_tx &rm_io31_can0_rx>;
-	pinctrl-names = "default";
-	status = "disabled";
-};
-
-&flexbus_fspi {
-	pinctrl-names = "default";
-	pinctrl-0 = <&flexbus0m1_pins &flexbus0_clk_pins
-		     &flexbus0_d0_pins &flexbus0_d1_pins
-		     &flexbus0_d2_pins &flexbus0_d3_pins>;
-	status = "disabled";
-
-	flash@0 {
-		compatible = "jedec,spi-nor";
-		reg = <0>;
-		spi-max-frequency = <100000000>;
-		spi-rx-bus-width = <4>;
-		spi-tx-bus-width = <1>;
-	};
 };
 
 &fspi {
@@ -178,8 +186,7 @@
 	pinctrl-0 = <&eth_rmii0_miim_pins
 		     &eth_rmii0_tx_bus2_pins
 		     &eth_rmii0_rx_bus2_pins
-		     &eth_rmii0_clk_pins
-		     &rmii0_rstn>;
+		     &eth_rmii0_clk_pins>;
 
 	phy-handle = <&rmii_phy0>;
 	status = "okay";
@@ -197,8 +204,7 @@
 	pinctrl-0 = <&eth_rmii1_miim_pins
 		     &eth_rmii1_tx_bus2_pins
 		     &eth_rmii1_rx_bus2_pins
-		     &eth_rmii1_clk_pins
-		     &rmii1_rstn>;
+		     &eth_rmii1_clk_pins>;
 
 	phy-handle = <&rmii_phy1>;
 	status = "okay";
@@ -215,18 +221,6 @@
 	vmmc-supply = <&vcc_3v3>;
 	vqmmc-supply = <&vcc_3v3>;
 	status = "okay";
-};
-
-&i2c2 {
-	status = "okay";
-	pinctrl-names = "default";
-	pinctrl-0 = <&rm_io4_i2c2_scl &rm_io5_i2c2_sda>;
-
-	hym8563: hym8563@51 {
-		compatible = "haoyu,hym8563";
-		reg = <0x51>;
-		pinctrl-names = "default";
-	};
 };
 
 &pinctrl {
@@ -326,6 +320,25 @@
 	status = "okay";
 };
 
+&i2c1 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&rm_io16_i2c1_scl &rm_io17_i2c1_sda>;
+
+	rk730: rk730@17 {
+		#sound-dai-cells = <0>;
+		compatible = "rockchip,rk730";
+		reg = <0x17>;
+		clocks = <&mclkout_sai1>;
+		clock-names = "mclk";
+		assigned-clocks = <&mclkout_sai1>;
+		assigned-clock-rates = <12288000>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&rm_io8_sai1_mclk>;
+		status = "okay";
+	};
+};
+
 &mdio0 {
 	rmii_phy0: phy@1 {
 		compatible = "ethernet-phy-ieee802.3-c22";
@@ -340,10 +353,6 @@
 	};
 };
 
-&sai4 {
-	status = "okay";
-};
-
 &saradc {
 	vref-supply = <&vcc_1v8>;
 	status = "okay";
@@ -353,6 +362,16 @@
 	status = "okay";
 };
 
+&uart3 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&rm_io14_uart3_tx &rm_io15_uart3_rx>;
+	linux,rs485-enabled-at-boot-time;
+	status = "okay";
+};
+
+&usb20_otg0 {
+	status = "okay";
+};
 
 &u2phy_otg1 {
     phy-supply = <&vcc5v0_otg1>;
