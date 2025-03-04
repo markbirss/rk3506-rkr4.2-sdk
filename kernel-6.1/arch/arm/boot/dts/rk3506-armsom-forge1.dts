@@ -339,6 +339,17 @@
 	};
 };
 
+&i2c2{
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&rm_io4_i2c2_scl &rm_io5_i2c2_sda>;
+
+	hym8563: hym8563@51 {
+		compatible = "haoyu,hym8563";
+		reg = <0x51>;
+	};
+};
+
 &mdio0 {
 	rmii_phy0: phy@1 {
 		compatible = "ethernet-phy-ieee802.3-c22";
