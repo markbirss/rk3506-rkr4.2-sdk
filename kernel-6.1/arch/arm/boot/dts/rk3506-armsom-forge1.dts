@@ -9,7 +9,7 @@
 #include <dt-bindings/suspend/rockchip-rk3506.h>
 #include <dt-bindings/input/rk-input.h>
 #include "rk3506.dtsi"
-
+#include "rk3506-armsom-forge1-display.dtsi"
 / {
 	model = "Rockchip RK3506J(BGA) ArmSoM Forge1";
 	compatible = "rockchip,rk3506J-armsom-forge1", "rockchip,rk3506";
@@ -215,6 +215,18 @@
 	vmmc-supply = <&vcc_3v3>;
 	vqmmc-supply = <&vcc_3v3>;
 	status = "okay";
+};
+
+&i2c2 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&rm_io4_i2c2_scl &rm_io5_i2c2_sda>;
+
+	hym8563: hym8563@51 {
+		compatible = "haoyu,hym8563";
+		reg = <0x51>;
+		pinctrl-names = "default";
+	};
 };
 
 &pinctrl {
