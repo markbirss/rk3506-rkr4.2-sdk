@@ -9,7 +9,8 @@
 #include <dt-bindings/suspend/rockchip-rk3506.h>
 #include <dt-bindings/input/rk-input.h>
 #include "rk3506.dtsi"
-#include "rk3506-armsom-forge1-display.dtsi"
+// #include "rk3506-armsom-forge1-display.dtsi"
+#include "rk3506-armsom-forge1-display-8hd.dtsi"
 
 / {
 	model = "Rockchip RK3506J(BGA) ArmSoM Forge1";
@@ -90,16 +91,17 @@
 	};
 
 	vcc3v3_lcd_n: vcc3v3-lcd0-n {
+		status = "okay";
 		compatible = "regulator-fixed";
-		enable-active-high;
-		gpio = <&gpio0 RK_PA1 GPIO_ACTIVE_HIGH>;
 		regulator-name = "vcc3v3_lcd_n";
 		regulator-boot-on;
-		regulator-state-mem {
-			regulator-off-in-suspend;
-		};
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-always-on;
+		enable-active-high;
+		gpio = <&gpio0 RK_PA1 GPIO_ACTIVE_HIGH>;
+		vin-supply = <&vcc_3v3>;
 	};
-
 	vcc5v0_otg1: vcc5v0-otg1-regulator {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc5v0_otg1";
@@ -255,24 +257,6 @@
 			rockchip,pins = <0 RK_PD0 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
-};
-
-&pwm0_4ch_0 {
-	pinctrl-names = "active";
-	pinctrl-0 = <&rm_io21_pwm0_ch0>;
-	status = "okay";
-};
-
-&pwm0_4ch_1 {
-	pinctrl-names = "active";
-	pinctrl-0 = <&rm_io20_pwm0_ch1>;
-	status = "okay";
-};
-
-&pwm0_4ch_2 {
-	pinctrl-names = "active";
-	pinctrl-0 = <&rm_io3_pwm0_ch2>;
-	status = "okay";
 };
 
 &rga2 {
