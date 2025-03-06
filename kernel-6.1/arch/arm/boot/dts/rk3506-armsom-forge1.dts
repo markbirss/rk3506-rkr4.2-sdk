@@ -126,10 +126,14 @@
 		status = "okay";
 		compatible = "rockchip,multicodecs-card";
 		rockchip,card-name = "rockchip-rk730";
+		spk-con-gpio = <&gpio1 RK_PC6 GPIO_ACTIVE_HIGH>;
+		hp-det-gpio = <&gpio0 RK_PD0 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&hp_det_pin>;
 		rockchip,pre-power-on-delay-ms = <30>;
 		rockchip,post-power-down-delay-ms = <40>;
 		rockchip,format = "i2s";
-		rockchip,mclk-fs = <256>;
+		rockchip,mclk-fs = <512>;
 		rockchip,cpu = <&sai1>;
 		rockchip,codec = <&rk730>;
 		rockchip,audio-routing =
@@ -142,7 +146,7 @@
 			"Speaker", "Speaker Power",
 			"Speaker", "Speaker Power",
 			"MIC2", "Main Mic",
-			"MIC1", "Headset Mic";
+			"MIC1", "Main Mic";
 	};
 };
 
@@ -243,6 +247,12 @@
 	usb {
 		vcc5v0_otg1_en: vcc5v0-otg1-en {
 			rockchip,pins = <1 RK_PD0 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
+
+	rk730 {
+		hp_det_pin: hp-det-pin {
+			rockchip,pins = <0 RK_PD0 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 };
