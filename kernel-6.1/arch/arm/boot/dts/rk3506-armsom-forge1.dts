@@ -150,6 +150,19 @@
 			"MIC2", "Main Mic",
 			"MIC1", "Main Mic";
 	};
+
+	leds {
+		compatible = "gpio-leds";
+		pinctrl-name = "default";
+		pinctrl-0 = <&work_led>;
+
+		green-led {
+			default-state = "on";
+			gpios = <&gpio0 RK_PB5 GPIO_ACTIVE_HIGH>;
+			label = "rockchip:work_led:system";
+			linux,default-trigger = "heartbeat";
+		};
+	};
 };
 
 &can0 {
@@ -255,6 +268,12 @@
 	rk730 {
 		hp_det_pin: hp-det-pin {
 			rockchip,pins = <0 RK_PD0 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
+
+	led {
+		work_led: work-led {
+			rockchip,pins = <0 RK_PB5 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 };
