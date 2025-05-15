@@ -158,7 +158,7 @@
 
 		green-led {
 			default-state = "on";
-			gpios = <&gpio0 RK_PB5 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio4 RK_PB3 GPIO_ACTIVE_HIGH>;
 			label = "rockchip:work_led:system";
 			linux,default-trigger = "heartbeat";
 		};
