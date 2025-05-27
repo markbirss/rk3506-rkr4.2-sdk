@@ -225,6 +225,11 @@ build_wifibt()
 		$KMAKE M=$RKWIFIBT_DIR/drivers/rtl8188fu modules
 	fi
 
+	if [[ "$RK_WIFIBT_MODULES" = "RTL8733BU" ]];then
+		echo "building RTL8733BU driver"
+		$KMAKE M=$RKWIFIBT_DIR/drivers/rtl8733bu modules
+	fi
+
 	if [[ "$RK_WIFIBT_MODULES" = "RTL8189FS" ]];then
 		echo "building rtl8189fs driver"
 		$KMAKE M=$RKWIFIBT_DIR/drivers/rtl8189fs modules
