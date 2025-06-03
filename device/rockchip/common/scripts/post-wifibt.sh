@@ -223,11 +223,13 @@ build_wifibt()
 	if [[ "$RK_WIFIBT_MODULES" = "RTL8188FU" ]];then
 		echo "building rtl8188fu driver"
 		$KMAKE M=$RKWIFIBT_DIR/drivers/rtl8188fu modules
+		$KMAKE M=$RKWIFIBT_DIR/drivers/bluetooth_usb_driver modules
 	fi
 
 	if [[ "$RK_WIFIBT_MODULES" = "RTL8733BU" ]];then
 		echo "building RTL8733BU driver"
 		$KMAKE M=$RKWIFIBT_DIR/drivers/rtl8733bu modules
+		$KMAKE M=$RKWIFIBT_DIR/drivers/bluetooth_usb_driver modules
 	fi
 
 	if [[ "$RK_WIFIBT_MODULES" = "RTL8189FS" ]];then
@@ -345,6 +347,12 @@ build_wifibt()
 				$TARGET_DIR/lib/firmware/
 		else
 			echo "INFO: $RK_WIFIBT_MODULES isn't bluetooth?"
+		fi
+
+		if [[ "$RK_WIFIBT_MODULES" = "RTL8733BU" ]];then
+			echo "copy RTL8733BU driver"
+			cp $RKWIFIBT_DIR/drivers/bluetooth_usb_driver/rtk_btusb.ko \
+					$TARGET_DIR/lib/modules/
 		fi
 
 		WIFI_KO_DIR=$(echo $RK_WIFIBT_MODULES | tr '[A-Z]' '[a-z]')

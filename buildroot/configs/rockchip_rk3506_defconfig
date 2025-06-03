@@ -1,7 +1,7 @@
 #include "base/base.config"
 #include "chips/rk3506_arm.config"
 #include "fs/vfat.config"
-include "wifibt/bt.config"
+#include "wifibt/bt.config"
 #include "wifibt/wireless.config"
 #include "multimedia/audio.config"
 #include "wifibt/bt.config"
