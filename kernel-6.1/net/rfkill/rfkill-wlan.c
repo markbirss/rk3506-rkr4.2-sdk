@@ -909,26 +909,26 @@ rfkill_alloc_fail:
 
 static int rfkill_wlan_remove(struct platform_device *pdev)
 {
-	struct rfkill_wlan_data *rfkill = platform_get_drvdata(pdev);
+// 	struct rfkill_wlan_data *rfkill = platform_get_drvdata(pdev);
 
-	LOG("Enter %s\n", __func__);
+// 	LOG("Enter %s\n", __func__);
 
-	wake_lock_destroy(&rfkill->wlan_irq_wl);
+// 	wake_lock_destroy(&rfkill->wlan_irq_wl);
 
-	fb_unregister_client(&rfkill_wlan_fb_notifier);
+// 	fb_unregister_client(&rfkill_wlan_fb_notifier);
 
-#if defined(CONFIG_HAS_EARLYSUSPEND)
-	unregister_early_suspend(&wlan_early_suspend_handler);
-#endif
+// #if defined(CONFIG_HAS_EARLYSUSPEND)
+// 	unregister_early_suspend(&wlan_early_suspend_handler);
+// #endif
 
-	if (gpio_is_valid(rfkill->pdata->power_n.io))
-		gpio_free(rfkill->pdata->power_n.io);
+// 	// if (gpio_is_valid(rfkill->pdata->power_n.io))
+// 	// 	gpio_free(rfkill->pdata->power_n.io);
 
-	if (gpio_is_valid(rfkill->pdata->reset_n.io))
-		gpio_free(rfkill->pdata->reset_n.io);
+// 	// if (gpio_is_valid(rfkill->pdata->reset_n.io))
+// 	// 	gpio_free(rfkill->pdata->reset_n.io);
 
-	kfree(rfkill);
-	g_rfkill = NULL;
+// 	kfree(rfkill);
+// 	g_rfkill = NULL;
 
 	return 0;
 }
