@@ -45,3 +45,6 @@ Compile the Kernel:
 ./build.sh kernel
 ```
 
+### Problem discussion
+
+Common issues can be discussed on the [forum](https://forum.armsom.org/c/armsom-cm1/12 "跳转到armsom forum")
