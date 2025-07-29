@@ -8,6 +8,7 @@
 #include "wifibt/wireless.config"
 #include "lvgl/lvgl_rkadk.config"
 #include "lvgl/rk_demo.config"
+#include "fs/ubifs.config"
 # BR2_PACKAGE_CHRONY is reset to default
 # BR2_PACKAGE_DNSMASQ is reset to default
 # BR2_PACKAGE_DROPBEAR is reset to default
@@ -28,7 +29,7 @@ BR2_ROOTFS_POST_BUILD_SCRIPT+="board/rockchip/rk3506/post-build-fast-display.sh"
 # BR2_TARGET_GENERIC_REMOUNT_ROOTFS_RW is not set
 BR2_TARGET_ROOTFS_SQUASHFS4_ZSTD=y
 BR2_TARGET_ROOTFS_UBI=y
-BR2_TARGET_ROOTFS_UBI_SQUASHFS=y
+BR2_TARGET_ROOTFS_UBI_UBIFS=y
 # BR2_TARGET_ROOTFS_UBI_SQUASHFS_STATIC is not set
 BR2_TARGET_ROOTFS_UBI_SUBSIZE=2048
 BR2_TIME_BITS_64=y
