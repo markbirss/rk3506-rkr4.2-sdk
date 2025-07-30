@@ -18,7 +18,7 @@
 #ifndef SRC_VERSION_H_
 #define SRC_VERSION_H_
 
-#define RKADK_VERSION_INFO        @VERSION_INFO@
-#define RKADK_BUILD_INFO          @BUILD_INFO@
+#define RKADK_VERSION_INFO        "unknown rkadk version for missing VCS info"
+#define RKADK_BUILD_INFO          "built 2025-07-29 21:20:12"
 
 #endif /*SRC_VERSION_H_*/
