@@ -4,22 +4,21 @@
  */
 
 /dts-v1/;
-// from rk3506b-evb1-v10
 #include <dt-bindings/display/drm_mipi_dsi.h>
 #include <dt-bindings/suspend/rockchip-rk3506.h>
 #include <dt-bindings/input/rk-input.h>
 #include "rk3506.dtsi"
-#include "rk3506-armsom-forge1-display-8hd.dtsi"
+#include "rk3506-armsom-display-7hd.dtsi"
 
 / {
 	model = "Rockchip RK3506J(BGA) ArmSoM CM1io";
 	compatible = "rockchip,rk3506J-armsom-CM1io", "rockchip,rk3506";
 
-    chosen {
+        chosen {
 		bootargs = "earlycon=uart8250,mmio32,0xff0a0000 console=ttyFIQ0 ubi.mtd=5 root=ubi0:rootfs rw rootfstype=ubifs rootwait snd_aloop.index=7 snd_aloop.use_raw_jiffies=1";
 	};
 
-    vcc12v_dc: vcc12v-dc {
+        vcc12v_dc: vcc12v-dc {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc12v_dc";
 		regulator-always-on;
@@ -79,7 +78,7 @@
 		pwm-supply = <&vcc5v0_sys>;
 	};
 
-    dd_0v9: vdd-0v9 {
+        dd_0v9: vdd-0v9 {
 		compatible = "regulator-fixed";
 		regulator-name = "vdd_0v9";
 		regulator-always-on;
@@ -301,7 +300,7 @@
 
 	led {
 		work_led: work-led {
-			rockchip,pins = <0 RK_PB5 RK_FUNC_GPIO &pcfg_pull_none>;
+			rockchip,pins = <4 RK_PB3 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 

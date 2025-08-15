@@ -9,8 +9,8 @@
 #include <dt-bindings/suspend/rockchip-rk3506.h>
 #include <dt-bindings/input/rk-input.h>
 #include "rk3506.dtsi"
-// #include "rk3506-armsom-forge1-display.dtsi"
-#include "rk3506-armsom-forge1-display-8hd.dtsi"
+// #include "rk3506-armsom-forge1-cm1-rasp-display-7hd.dtsi"
+#include "rk3506-armsom-display-7hd.dtsi"
 
 / {
 	model = "Rockchip RK3506J(BGA) ArmSoM Forge1";
